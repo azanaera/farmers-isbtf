@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="MigrationLifecycle">
+  <plugin-gosu
+    gosuclass="gw.expimp.configuration.MigrationLifecycle">
+    <param
+      name="propertiesProviderConfigurationClass"
+      value="gw.surepath.ab.cvmt.expimp.configuration.CvmtCloudPropertiesProviderConfiguration"/>
+    <param
+      name="datasourceConfigurationClassPropertyName"
+      value="gw.cvmt.datasource_factories_configuration.classname"/>
+    <param
+      name="migrationComponentsConfigurationClassPropertyName"
+      value="gw.cvmt.migration_components_configuration.classname"/>
+  </plugin-gosu>
+</plugin>

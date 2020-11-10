@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="List of frequency options"
+  name="FrequencyType_Ext">
+  <typecode
+    code="EveryWeek"
+    desc="Every Week"
+    name="Every Week">
+    <category
+      code="Weekly"
+      typelist="CheckRecurrenceType_Ext"/>
+  </typecode>
+  <typecode
+    code="EverytwoWeek"
+    desc="Every two Weeks"
+    name="Every two Weeks">
+    <category
+      code="Weekly"
+      typelist="CheckRecurrenceType_Ext"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other">
+    <category
+      code="Daily"
+      typelist="CheckRecurrenceType_Ext"/>
+    <category
+      code="Monthly"
+      typelist="CheckRecurrenceType_Ext"/>
+    <category
+      code="Weekly"
+      typelist="CheckRecurrenceType_Ext"/>
+  </typecode>
+  <typecode
+    code="EveryMonth"
+    desc="Every Month"
+    name="Every Month">
+    <category
+      code="Monthly"
+      typelist="CheckRecurrenceType_Ext"/>
+  </typecode>
+  <typecode
+    code="EveryDay"
+    desc="Every Day"
+    name="Every Day">
+    <category
+      code="Daily"
+      typelist="CheckRecurrenceType_Ext"/>
+  </typecode>
+  <typecode
+    code="EveryOtherDay"
+    desc="Every Other Day"
+    name="Every Other Day">
+    <category
+      code="Daily"
+      typelist="CheckRecurrenceType_Ext"/>
+  </typecode>
+</typelist>

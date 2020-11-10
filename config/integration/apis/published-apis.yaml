@@ -1,0 +1,12 @@
+apis:
+- name: gw.pl.framework.api_list-1.0
+- name: gw.pl.system.cluster_tools-1.0
+- name: gw.pl.system.db_tools-0.1
+- name: gw.pl.system.maintenance_tools-1.0
+- name: gw.pl.system.messaging_tools-0.1
+- name: gw.pl.system.server_profiler-1.0
+- name: gw.pl.system.server_tools-1.0
+- name: gw.pl.system.workflow-1.0
+- name: server_tools-1.0
+defaultTemplate:
+- name: gw.pl.framework.dev_template-1.0

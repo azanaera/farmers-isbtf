@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="LegalCovDefense_Ext"
+  desc="Coverage Defence"
+  table="legacovdefense_ext"
+  type="retireable"
+  exportable="true">
+
+  <implementsEntity
+    name="ABLinkable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    name="CovDefense"
+    nullok="true"
+    typelist="CovDefense_Ext"/>
+  <foreignkey
+    desc="Foreign key back to ABContact"
+    fkentity="ABContact"
+    name="ABContactID"
+    nullok="true"/>
+  
+</entity>

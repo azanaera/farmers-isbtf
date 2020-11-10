@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="VendorRecurrenceInfo_ExtInputSet">
+    <Require
+      name="contact"
+      type="ABContact"/>
+    <Label
+      label="DisplayKey.get(&quot;Toggle.Web.Contacts.BatchInformation_Ext&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="BatchInd_Ext"
+      label="DisplayKey.get(&quot;Toggle.Web.Contacts.BatchEligible_Ext&quot;)"
+      required="true"
+      value="contact.BatchPayInd_Ext">
+      <PostOnChange
+        onChange="if(!contact.BatchPayInd_Ext){contact.CheckRecurrenceType_Ext = null ; contact.DueDateOfFirstChk_Ext = null }"/>
+    </BooleanRadioInput>
+    <TypeKeyInput
+      editable="true"
+      id="Recurrence_Ext"
+      label="DisplayKey.get(&quot;Toggle.Web.Contacts.BatchEligible_Ext.Recurrence_Ext&quot;)"
+      required="true"
+      value="contact.CheckRecurrenceType_Ext"
+      valueType="CheckRecurrenceType_Ext"
+      visible="contact.BatchPayInd_Ext">
+      <PostOnChange
+        onChange="ext.utilities.UIContactUtil.resetRecurrenceValues(contact)"/>
+    </TypeKeyInput>
+    <DateInput
+      editable="true"
+      id="FirstChekDueDate_Ext"
+      label="DisplayKey.get(&quot;Toggle.Web.Contacts.DueDate_Ext&quot;)"
+      required="true"
+      validationExpression="(contact.DueDateOfFirstChk_Ext != null &amp;&amp; contact.DueDateOfFirstChk_Ext.trimToMidnight().compareTo(gw.api.util.DateUtil.currentDate().trimToMidnight()) == -1) ? DisplayKey.get(&quot;Toggle.Error.Date.InvalidPastDate.Message_Ext&quot;) : null"
+      value="contact.DueDateOfFirstChk_Ext"
+      visible="contact.BatchPayInd_Ext"/>
+    <InputDivider/>
+    <InputSet
+      visible="contact.CheckRecurrenceType_Ext != null">
+      <Label
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.SubsequentChecks_Ext&quot;)"
+        visible="contact typeis ABCompanyVendor"/>
+      <RangeRadioInput
+        editable="true"
+        id="Frequency_Ext"
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.Frequency_Ext&quot;)"
+        required="true"
+        stacked="true"
+        value="contact.FrequencyType_Ext"
+        valueRange="FrequencyType_Ext.getAllTypeKeys().where(\elt1 -&gt; elt1.hasCategory(contact.CheckRecurrenceType_Ext))"
+        valueType="FrequencyType_Ext">
+        <PostOnChange/>
+      </RangeRadioInput>
+      <TextInput
+        align="center"
+        editable="true"
+        format="ext.utilities.UIContactUtil.setRecurrenceDaysLabel(contact)"
+        id="Other_Ext"
+        maxChars="2"
+        required="true"
+        value="contact.RecurrenceNumber_Ext"
+        valueType="java.lang.Integer"
+        visible="contact.FrequencyType_Ext == FrequencyType_Ext.TC_OTHER"/>
+      <TypeKeyInput
+        editable="true"
+        id="duedate_Ext"
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.SetDueBasedOn_Ext&quot;)"
+        required="true"
+        value="contact.MntlyRecurnceDateType_Ext"
+        valueType="MntlyRecurnceDateType_Ext"
+        visible="contact.CheckRecurrenceType_Ext == CheckRecurrenceType_Ext.TC_MONTHLY">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TextInput
+        editable="true"
+        id="Date_Ext"
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.DayOfMonth_Ext&quot;)"
+        required="true"
+        value="contact.RecurrenceDate_Ext"
+        valueType="java.lang.Integer"
+        visible="contact.CheckRecurrenceType_Ext == CheckRecurrenceType_Ext.TC_MONTHLY &amp;&amp; contact.MntlyRecurnceDateType_Ext != null  &amp;&amp; contact.MntlyRecurnceDateType_Ext == MntlyRecurnceDateType_Ext.TC_SPECIFICDATE"/>
+      <TypeKeyInput
+        editable="true"
+        id="WhickWeek_Ext"
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.WhichWeek_Ext&quot;)"
+        required="true"
+        value="contact.RecurrenceWeek_Ext"
+        valueType="RecurrenceWeek_Ext"
+        visible="contact.CheckRecurrenceType_Ext == CheckRecurrenceType_Ext.TC_MONTHLY &amp;&amp; contact.MntlyRecurnceDateType_Ext != null &amp;&amp; contact.MntlyRecurnceDateType_Ext == MntlyRecurnceDateType_Ext.TC_WEEKDAY"/>
+      <TypeKeyInput
+        editable="true"
+        id="DayOfWeek_Ext"
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.WeekDay_Ext&quot;)"
+        required="true"
+        value="contact.RecurrenceDay_Ext"
+        valueType="RecurrenceDay_Ext"
+        visible="(contact.MntlyRecurnceDateType_Ext != null &amp;&amp; contact.MntlyRecurnceDateType_Ext == MntlyRecurnceDateType_Ext.TC_WEEKDAY) || contact.CheckRecurrenceType_Ext == CheckRecurrenceType_Ext.TC_WEEKLY"/>
+      <CheckBoxInput
+        editable="true"
+        id="AdvanceDueDaysInd_Ext"
+        value="contact.IssueChkInAdvanceInd_Ext"
+        valueLabel="DisplayKey.get(&quot;Toggle.Web.Contacts.DaysinAdvance_Ext&quot;)"
+        visible="contact.CheckRecurrenceType_Ext != null &amp;&amp; contact.CheckRecurrenceType_Ext != CheckRecurrenceType_Ext.TC_DAILY">
+        <PostOnChange
+          onChange="if(!contact.IssueChkInAdvanceInd_Ext) {contact.DaysinAdvance_Ext = null}"/>
+      </CheckBoxInput>
+      <TextInput
+        editable="true"
+        id="DaysinAdvance_Ext"
+        label="DisplayKey.get(&quot;Toggle.Web.Contacts.AdvanceDays_Ext&quot;)"
+        required="contact.IssueChkInAdvanceInd_Ext"
+        value="contact.DaysinAdvance_Ext"
+        valueType="java.lang.Integer"
+        visible="contact.CheckRecurrenceType_Ext != CheckRecurrenceType_Ext.TC_DAILY &amp;&amp; contact.IssueChkInAdvanceInd_Ext"/>
+    </InputSet>
+  </InputSet>
+</PCF>

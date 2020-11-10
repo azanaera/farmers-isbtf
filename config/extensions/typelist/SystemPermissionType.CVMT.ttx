@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- Typelists related to security -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="SystemPermissionType">
+  <typecode
+    code="contactmigrationtooledit_sp"
+    desc="Permission to create and drop Contact Migration Tool database schema"
+    name="Manage Claim Migration Tool"/>
+  <typecode
+    code="testcontactmigrationtooledit_sp"
+    desc="Permission to load sample data, read migrated contact payload by payload id or submission number, insert payload for migration and read migration status"
+    name="Manage Contact Migration Tool Tests"/>
+</typelistextension>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="QueuedPayloadGroup"
+  desc="Serialized group of entity payloads for migration purposes"
+  extendable="false">
+  <column
+    name="GroupId"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <array
+    arrayentity="QueuedPayload"
+    name="QueuedPayloads"/>
+</nonPersistentEntity>

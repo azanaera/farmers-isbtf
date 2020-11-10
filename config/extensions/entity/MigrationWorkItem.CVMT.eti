@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MigrationWorkItem"
+  desc="Work item for MigrationWorkQueue"
+  table="migrationworkitem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <column
+    deprecated="true"
+    desc="Deprecated - Not used nay more"
+    name="SerializedPayloadGroup"
+    nullok="true"
+    type="longtext">
+    <columnParam
+      name="logicalSize"
+      value="1000000000"/>
+  </column>
+  <column
+    name="GroupId"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+</entity>

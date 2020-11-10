@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="List of check recurrence types"
+  name="CheckRecurrenceType_Ext">
+  <typecode
+    code="Daily"
+    desc="Daily"
+    name="Daily"/>
+  <typecode
+    code="Monthly"
+    desc="Monthly"
+    name="Monthly"/>
+  <typecode
+    code="Weekly"
+    desc="Weekly"
+    name="Weekly"/>
+</typelist>

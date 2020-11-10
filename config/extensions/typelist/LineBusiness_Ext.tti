@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="LineBusiness"
+  name="LineBusiness_Ext">
+  <typecode
+    code="AutoNLC"
+    desc="Auto/NLC"
+    name="Auto/NLC"
+    priority="10"/>
+  <typecode
+    code="CommercialCasualty"
+    desc="Commercial Casualty"
+    name="Commercial Casualty"
+    priority="20"/>
+  <typecode
+    code="Environmental"
+    desc="Environmental"
+    name="Environmental"
+    priority="30"/>
+  <typecode
+    code="Marine"
+    desc="Marine"
+    name="Marine"
+    priority="40"/>
+  <typecode
+    code="Property"
+    desc="Property"
+    name="Property"
+    priority="50"/>
+  <typecode
+    code="SAE"
+    desc="SAE"
+    name="SAE"
+    priority="60"/>
+  <typecode
+    code="Asbestos"
+    desc="Asbestos"
+    name="Asbestos"
+    priority="70"/>
+  <typecode
+    code="VendorServices"
+    desc="Vendor Services"
+    name="Vendor Services"
+    priority="80"/>
+  <typecode
+    code="CommercialWC"
+    desc="Commercial Workers Comp"
+    name="Commercial Workers Comp"
+    priority="90"/>
+  <typecode
+    code="WorkersComp"
+    name="Workers Comp"
+    priority="100"/>
+</typelist>

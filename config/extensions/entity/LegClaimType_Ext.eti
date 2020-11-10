@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entity
+xmlns="http://guidewire.com/datamodel"
+entity="LegClaimType_Ext"
+desc="Legal Claim Type"
+table="LegClaimType_Ext"
+type="retireable"
+exportable="true"
+final="false">
+<implementsEntity
+  name="ABLinkable"/>
+<implementsEntity
+  name="Extractable"/>
+<typekey
+  name="LegalClaimType"
+  nullok="true"
+  typelist="LegalClaimType_Ext"/>
+<foreignkey
+  desc="Foreign key back to ABContact"
+  fkentity="ABContact"
+  name="ABContactID"
+  nullok="true"/>
+</entity>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="LegalClaimType"
+  name="LegalClaimType_Ext">
+  <typecode
+    code="Environmental"
+    desc="Environmental"
+    name="Environmental"
+    priority="10"/>
+  <typecode
+    code="Mold"
+    desc="Mold"
+    name="Mold"
+    priority="20"/>
+  <typecode
+    code="IP"
+    desc="IP (Intellectual Prop/Adv Inj)"
+    name="IP (Intellectual Prop/Adv Inj)"
+    priority="30"/>
+  <typecode
+    code="Patent"
+    desc="Patent"
+    name="Patent"
+    priority="40"/>
+  <typecode
+    code="Hurricane"
+    desc="Hurricane"
+    name="Hurricane"
+    priority="50"/>
+  <typecode
+    code="Property"
+    desc="Property"
+    name="Property"
+    priority="60"/>
+  <typecode
+    code="Wildfire"
+    desc="Wildfire"
+    name="Wildfire"
+    priority="70"/>
+  <typecode
+    code="Asbestos"
+    desc="Asbestos"
+    name="Asbestos"
+    priority="80"/>
+  <typecode
+    code="Marine"
+    desc="Marine"
+    name="Marine"
+    priority="90"/>
+  <typecode
+    code="Foremost"
+    desc="Foremost"
+    name="Foremost"
+    priority="100"/>
+  <typecode
+    code="Appellate"
+    desc="Appellate"
+    name="Appellate"
+    priority="110"/>
+  <typecode
+    code="CommercialCasualty"
+    desc="Commercial Casualty"
+    name="Commercial Casualty"
+    priority="120"/>
+  <typecode
+    code="AutoNLC"
+    desc="Auto/NLC"
+    name="Auto/NLC"
+    priority="130"/>
+  <typecode
+    code="WorkComp"
+    desc="Workers Compensation"
+    name="Workers Compensation"
+    priority="140"/>
+  <typecode
+    code="TNC"
+    desc="TNC"
+    name="TNC"
+    priority="150"/>
+</typelist>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="CvmtABContactInfo_SP"
+  desc="Information at the ABContact-level needed for migration."
+  table="cvmtabcontactinfo_sp"
+  type="retireable"
+  exportable="true">
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ABContactID"
+    desc="Associated ABContact"
+    fkentity="ABContact"
+    name="ABContact"
+    nullok="false"/>
+  <column
+    desc="PayloadID for reconciliation - this is set by Migration Tool."
+    name="PayloadID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <index
+    desc="Performance index for PayloadID."
+    name="PayloadIDIndex">
+    <indexcol
+      keyposition="1"
+      name="PayloadID"/>
+  </index>
+  <implementsEntity
+    name="FrozenSetMember"/>
+</entity>

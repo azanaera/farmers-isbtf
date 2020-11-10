@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ABContact">
+  <implementsInterface
+   iface="gw.api.contact.ABContactPublicMethods"
+   impl="gw.api.contact.pendingchanges.DefaultABContactPublicMethodsImpl"/>
+  <column-override
+    desc="Primary email address associated with the contact."
+    name="EmailAddress1"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+    <columnParam
+      name="validator"
+      value="Email"/>
+  </column-override>
+  <column-override
+    desc="Secondary email address associated with the contact."
+    name="EmailAddress2"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+    <columnParam
+      name="validator"
+      value="Email"/>
+  </column-override>
+  <column-override
+    desc="Tax ID for the contact (SSN or EIN)."
+    name="TaxID"
+    nullok="true"
+    type="ssn">
+    <columnParam
+      name="encryption"
+      value="true"/>
+  </column-override>
+  <column
+    default="false"
+    desc="Has W-9 form been received"
+    name="W9Received"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="W-9 form received date"
+    name="W9ReceivedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="W-9 valid start date"
+    name="W9ValidFrom"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="W-9 valid to date"
+    name="W9ValidTo"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="KeywordKanji is the general term for the Kanji Name (Companies and Places) and LastName (for Persons).  Used only for Japanese names and will be null otherwise."
+    name="KeywordKanji"
+    nullok="true"
+    overwrittenInStagingTable="true"
+    type="shorttext"/>
+  <array
+    arrayentity="EFTData"
+    arrayfield="Contact"
+    desc="Electronic Funds Transfer data for the contact"
+    name="EFTRecords"/>
+  <index
+    desc="Index to speed up Search by Specialist Service with City and State"
+    name="ABSpecialist"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CityDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="StateDenorm"/>
+    <indexcol
+      keyposition="3"
+      name="PostalCodeDenorm"/>
+    <indexcol
+      keyposition="4"
+      name="Subtype"/>
+    <indexcol
+      keyposition="5"
+      name="CreateStatus"/>
+    <indexcol
+      keyposition="6"
+      name="Retired"/>
+    <indexcol
+      keyposition="7"
+      name="Id"/>
+  </index>
+  <column
+    desc="Levy Withholding?"
+    name="Levy_Ext"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="BLO Code"
+    name="BLOCode_Ext"
+    nullok="true"
+    typelist="BLOCode_Ext"/>
+  <typekey
+    desc="Alternate phone country."
+    name="AltPhoneCountry_Ext"
+    nullok="true"
+    typelist="PhoneCountryCode"/>
+  <column
+    desc="Home phone number associated with the contact."
+    name="AltPhone_Ext"
+    nullok="true"
+    type="phone">
+    <columnParam
+      name="phonecountrycodeProperty"
+      value="AltPhoneCountry_Ext"/>
+    <columnParam
+      name="extensionProperty"
+      value="AltPhoneExtension_Ext"/>
+  </column>
+  <column
+    desc="Alternate phone extension."
+    name="AltPhoneExtension_Ext"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <array
+    arrayentity="LegalLOB_Ext"
+    desc="have an array of LegalAttribue_Ext"
+    name="LegalLOBs_Ext"/>
+  <array
+    arrayentity="LegClaimType_Ext"
+    desc="have an array of LegalAttribue_Ext"
+    name="LegClaimTypes_Ext"/>
+  <array
+    arrayentity="LegalCovDefense_Ext"
+    desc="have an array of LegalAttribue_Ext"
+    name="LegalCovDefenses_Ext"/>
+  <column
+    desc="DBA"
+    name="DoingBusinessAs_Ext"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="Backup withholding"
+    name="Backupwithholding_Ext"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Indicates if the vendor is eligible for batch pay"
+    name="BatchPayInd_Ext"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Due date of First Check"
+    name="DueDateOfFirstChk_Ext"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Check Recurrence type"
+    name="CheckRecurrenceType_Ext"
+    nullok="true"
+    typelist="CheckRecurrenceType_Ext"/>
+  <typekey
+    desc="check Recurrence frequency"
+    name="FrequencyType_Ext"
+    nullok="true"
+    typelist="FrequencyType_Ext"/>
+  <typekey
+    desc="Reccuring day of the week"
+    name="RecurrenceDay_Ext"
+    nullok="true"
+    typelist="RecurrenceDay_Ext"/>
+  <column
+    desc="Indicator for issuing check in advance"
+    name="IssueChkInAdvanceInd_Ext"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Issue check no of days in Advance"
+    name="DaysinAdvance_Ext"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="Week for Check Recurrence"
+    name="RecurrenceWeek_Ext"
+    nullok="true"
+    typelist="RecurrenceWeek_Ext"/>
+  <column
+    desc="indicates no of month/week for check recurrence"
+    name="RecurrenceNumber_Ext"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="List of Monthly recurrence types"
+    name="MntlyRecurnceDateType_Ext"
+    nullok="true"
+    typelist="MntlyRecurnceDateType_Ext"/>
+  <column
+    desc="No of days the recurrence has to occur"
+    name="RecurrenceDate_Ext"
+    nullok="true"
+    type="integer"/>
+</extension>

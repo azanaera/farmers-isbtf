@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Monthly recurrence options"
+  name="MntlyRecurnceDateType_Ext">
+  <typecode
+    code="weekday"
+    desc="Week Day"
+    name="Week Day"/>
+  <typecode
+    code="specificdate"
+    desc="Specific Date"
+    name="Specific Date"/>
+</typelist>

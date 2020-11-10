@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="LegalLOB_Ext"
+  desc="Line of Business for Legal entities"
+  table="legallob_ext"
+  exportable="true"
+  type="retireable">
+  <implementsEntity
+    name="ABLinkable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    name="LineBusiness"
+    nullok="true"
+    typelist="LineBusiness_Ext"/>  
+  <foreignkey
+    desc="Foreign key back to ABContact"
+    fkentity="ABContact"
+    name="ABContactID"
+    nullok="true"/>
+
+</entity>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="CovDefense"
+  name="CovDefense_Ext">
+  <typecode
+    code="Coverage"
+    desc="Coverage"
+    name="Coverage"/>
+  <typecode
+    code="Defense"
+    desc="Defense"
+    name="Defense"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"/>
+</typelist>

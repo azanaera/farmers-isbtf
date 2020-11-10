@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="BatchProcessType">
+
+  <typecode
+    code="ContactMigrationTool_SP"
+    desc="Contact Migration Tool"
+    name="Contact Migration Tool">
+    <category
+  code="UIRunnable"
+  typelist="BatchProcessTypeUsage"/>
+</typecode>
+</typelistextension>
