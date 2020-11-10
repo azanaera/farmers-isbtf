@@ -1,0 +1,9 @@
+.idea/
+.gradle/
+gradle/cache/
+Jenkinsfile
+configuration.iml
+build/
+generated/
+generated_classes/
+plugins/Gosu/idea-gclasses/
