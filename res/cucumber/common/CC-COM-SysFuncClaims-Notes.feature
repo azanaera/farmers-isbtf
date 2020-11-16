@@ -18,10 +18,6 @@ Feature: Note (CC-COM-SysFuncClaims-Notes)
     Given I am a user with the "Adjuster" role
     And a Personal Auto claim
     And the claim has a bodily injury exposure
-    And the claim has a Medical Details exposure
-    And the claim has a "<string>" exposure
-    And the claim has a first party vehicle exposure
-    And the claim exposure
 #    And I choose a third party to be the claimant for the vehicle exposure
     When I start creating a new note for "Medical"
     And Security Type is "Medical"
@@ -60,8 +56,7 @@ Feature: Note (CC-COM-SysFuncClaims-Notes)
       | Salvage                       |
       | Litigation                    |
 
-
-    # TODO
+  # TODO --OK--
   @23160-GW, @ignore
   Scenario: 4. Delete a note to an existing Personal Auto claim
     Given I am a user with the "Manager" role

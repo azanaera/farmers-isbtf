@@ -141,5 +141,4 @@ class PA_NewClaimCreationSteps {
   public function anIncidentForVehicleShouldBeCreatedOnTheClaim() {
     _contextFactory.getClaimContext<PAClaimContext>().verifyVehicleIncidentCreated()
   }
-  
 }

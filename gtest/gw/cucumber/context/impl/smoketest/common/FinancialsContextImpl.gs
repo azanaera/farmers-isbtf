@@ -100,6 +100,30 @@ class FinancialsContextImpl extends CucumberStepBase implements FinancialsContex
     _reserveWrapper.set(reserve)
   }
 
+  override function createExistingClaimReserves(table : DataTable) {
+
+    var reservesMap = table.asMaps(String, String)
+    for (row in reservesMap) {
+      var costType = _costTypeTypelistTransformer.transform(row.get(DK_COST_TYPE))
+      var costCategory = _costCategoryTypelistTransformer.transform(row.get(DK_COST_CATEGORY))
+      var amount = row.get(DK_AMOUNT)
+
+      _costTypeWrapper.set(costType)
+      _costCategoryWrapper.set(costCategory)
+      var reserve : Reserve
+      gw.transaction.Transaction.runWithNewBundle(\bundle -> {
+        reserve = ReserveBuilder.uiReadyClaimLevelReserve(_claimWrapper.get(), _currencyAmountTransformer.transform(amount))
+            .onClaim(_claimWrapper.get())
+            .withCostType(costType)
+            .withCostCategory(costCategory)
+            .withCurrency(_currencyAmountTransformer.transform(amount).Currency)
+            .withReservingCurrency(_currencyAmountTransformer.transform(amount).Currency)
+            .create(bundle)
+      }, CurrentUser)
+      _reserveWrapper.set(reserve)
+
+    }
+  }
   override function createExistingReserves(table : DataTable) {
     var reservesMap = table.asMaps(String, String)
     for (row in reservesMap) {
