@@ -2,7 +2,6 @@ package gw.cucumber.steps.lob.auto
 
 uses com.google.inject.Inject
 uses cucumber.api.DataTable
-uses cucumber.api.java.en.And
 uses cucumber.api.java.en.Given
 uses cucumber.api.java.en.When
 uses cucumber.api.java.en.Then

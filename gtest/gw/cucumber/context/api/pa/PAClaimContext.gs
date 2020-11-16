@@ -129,5 +129,4 @@ interface PAClaimContext extends ClaimContext {
    * Refers the claim for subrogation
    */
   function claimReferredForSubrogation()
-
 }

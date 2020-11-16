@@ -100,30 +100,6 @@ class FinancialsContextImpl extends CucumberStepBase implements FinancialsContex
     _reserveWrapper.set(reserve)
   }
 
-  override function createExistingClaimReserves(table : DataTable) {
-
-    var reservesMap = table.asMaps(String, String)
-    for (row in reservesMap) {
-      var costType = _costTypeTypelistTransformer.transform(row.get(DK_COST_TYPE))
-      var costCategory = _costCategoryTypelistTransformer.transform(row.get(DK_COST_CATEGORY))
-      var amount = row.get(DK_AMOUNT)
-
-      _costTypeWrapper.set(costType)
-      _costCategoryWrapper.set(costCategory)
-      var reserve : Reserve
-      gw.transaction.Transaction.runWithNewBundle(\bundle -> {
-        reserve = ReserveBuilder.uiReadyClaimLevelReserve(_claimWrapper.get(), _currencyAmountTransformer.transform(amount))
-            .onClaim(_claimWrapper.get())
-            .withCostType(costType)
-            .withCostCategory(costCategory)
-            .withCurrency(_currencyAmountTransformer.transform(amount).Currency)
-            .withReservingCurrency(_currencyAmountTransformer.transform(amount).Currency)
-            .create(bundle)
-      }, CurrentUser)
-      _reserveWrapper.set(reserve)
-
-    }
-  }
   override function createExistingReserves(table : DataTable) {
     var reservesMap = table.asMaps(String, String)
     for (row in reservesMap) {
@@ -393,10 +369,11 @@ class FinancialsContextImpl extends CucumberStepBase implements FinancialsContex
     var exposure = _exposureWrapper.get() ?: _claimWrapper.get().Exposures.single()
     assertThat(exposure).isNotNull()
 
-//    var newReserve = _proxy.TabBar.goToClaim(_claimWrapper.get()).goToNewReserveSet()
-    var claimSummary = new Navigation<ClaimSummary>(_proxy).ensureOnPage(\tabBar ->
-        tabBar.goToClaim(_claimWrapper.get()), CurrentUser)
-    var newReserve = claimSummary.goToNewReserveSet()
+//    var newReserve = new Navigation<NewReserveSet>(_proxy).ensureOnPage(\tabBar ->
+//        tabBar.goToClaim(_claimWrapper.get()).goToNewReserveSet(), CurrentUser)
+//    added this code for navigation
+    var newReserve = loginAsUser(CurrentUser).goToClaim(_claimWrapper.get()).goToNewReserveSet()
+//
     var entry = newReserve.NewReserveSetScreen.ReservesSummaryDV.EditableReservesLV._Entries
         .firstWhere(\entry -> entry.Exposure_Readonly.Text == exposure.DisplayName
             && entry.CostType.Text == costTypeString
@@ -570,18 +547,19 @@ class FinancialsContextImpl extends CucumberStepBase implements FinancialsContex
     })
     var check : Check
     var claim = _claimWrapper.get()
-
+    var x = _exposureWrapper.get()//
     gw.transaction.Transaction.runWithNewBundle(\bundle -> {
       claim.refresh()
       claim = bundle.add(claim)
 
-      var cc = claim.newCheckCreator()
-          .withPrimaryPayee(new CheckPayeeInfo()
-              .withPayee(claim.Contacts.first().Contact)
-              .withPayeeRole(ContactRole.TC_CHECKPAYEE)
+      var cc = x.newCheckCreator()
+//      var cc = claim.newCheckCreator()
+              .withPrimaryPayee(new CheckPayeeInfo()
+                  .withPayee(claim.Contacts.first().Contact)
+                  .withPayeeRole(ContactRole.TC_CHECKPAYEE)
           )
-          .withCostType(_costTypeWrapper.get())
-          .withCostCategory(_costCategoryWrapper.get()) // not taking the value from the gherkin?
+          .withCostType(CostType.TC_CLAIMCOST)
+          .withCostCategory(CostCategory.TC_COL_PA_EXT) // not taking the value from the gherkin?
           .withPaymentMethod(PaymentMethod.TC_CHECK)
           .withPaymentType(PaymentType.TC_FINAL)
           .withCheckAmount(currencyAmount)
@@ -592,7 +570,7 @@ class FinancialsContextImpl extends CucumberStepBase implements FinancialsContex
       check = cc.createCheck()
       cc.prepareForCommit()
     }, User.util.UnrestrictedUser)
-
+    _exposureWrapper.set(x)//
     _claimWrapper.set(claim)
     _checkWrapper.set(check)
   }
@@ -852,8 +830,10 @@ class FinancialsContextImpl extends CucumberStepBase implements FinancialsContex
   override function verifyPayment(amountString : String, paymentTypeString : String) {
     var paymentType = _paymentTypeTypelistTransformer.transform(paymentTypeString)
 
-    var transactions = new Navigation<ClaimFinancialsTransactions>(_proxy).ensureOnPage(\tabBar ->
-        tabBar.goToClaim(_claimWrapper.get()).MenuLinks.goToClaimTransactions(), CurrentUser)
+    var transactions = loginAsUser(CurrentUser).goToClaim(_claimWrapper.get()).goToClaimFinancialsTransactions()
+
+//    var transactions = new Navigation<ClaimFinancialsTransactions>(_proxy).ensureOnPage(\tabBar ->
+//        tabBar.goToClaim(_claimWrapper.get()).MenuLinks.goToClaimTransactions(), CurrentUser)
     transactions.ClaimFinancialsTransactionsScreen.TransactionsLVRangeInput.clickByLabelSubstr(DK_PAYMENTS)
     var lastPayment = transactions.ClaimFinancialsTransactionsScreen.TransactionsLV_payment._Entries.last()
     var transactionsDetail = lastPayment.TransactionAmountViewDetail.click() as ClaimFinancialsTransactionsDetail

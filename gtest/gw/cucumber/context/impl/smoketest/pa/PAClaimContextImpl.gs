@@ -4,19 +4,15 @@ uses com.google.inject.Inject
 uses cucumber.api.DataTable
 uses gw.api.database.Query
 uses gw.api.databuilder.ClaimBuilder
-uses gw.api.databuilder.DeductibleBuilder
 uses gw.api.databuilder.ExposureBuilder
 uses gw.api.databuilder.FixedPropertyIncidentBuilder
 uses gw.api.databuilder.IncidentBuilderBase
 uses gw.api.databuilder.InjuryIncidentBuilder
-uses gw.api.databuilder.MedicalContactStatusBuilder
 uses gw.api.databuilder.PolicyBuilder
-uses gw.api.databuilder.PolicyCoverageBuilder
 uses gw.api.databuilder.VehicleBuilder
 uses gw.api.databuilder.VehicleCoverageBuilder
 uses gw.api.databuilder.VehicleIncidentBuilder
 uses gw.api.databuilder.VehicleRUBuilder
-uses gw.api.financials.CurrencyAmount
 uses gw.api.locale.DisplayKey
 uses gw.api.util.DateUtil
 uses gw.cucumber.context.api.pa.PAClaimContext
@@ -37,7 +33,6 @@ uses pcftest.FNOLContactPopup
 uses pcftest.FNOLVehicleIncidentPopup
 uses pcftest.NewFixedPropertyIncidentPopup
 uses pcftest.OtherServiceRequestPopup
-uses typekey.Coverage
 
 @SuppressWarnings("unused")
 class PAClaimContextImpl extends ClaimContextImpl implements PAClaimContext {
@@ -56,8 +51,7 @@ class PAClaimContextImpl extends ClaimContextImpl implements PAClaimContext {
             .withVehicle(new VehicleBuilder().uiReadyVehicle())
             .withCoverage(new VehicleCoverageBuilder()
                 .withIncidentLimit(15000bd.ofDefaultCurrency())
-                .withDeductible(new DeductibleBuilder().withAmount(500bd.ofDefaultCurrency()))
-                .withType(TC_COM_PA_EXT)))
+                .withType(TC_COL_PA_EXT)))
         .create()
     (_policyDataSetWrapper.get() as PolicyDataSet).PolicyNumber = policy.PolicyNumber
 
@@ -88,12 +82,6 @@ class PAClaimContextImpl extends ClaimContextImpl implements PAClaimContext {
               .withRiskUnit(new VehicleRUBuilder()
                   .withRUNumber(1)
                   .withVehicle(new VehicleBuilder().uiReadyVehicle())
-
-//              .withCoverage(new PolicyCoverageBuilder()
-//                            .withType(CoverageType.TC_COL_PA_EXT)
-//                            .withExposureLimit(new CurrencyAmount(500.0))
-//                            .withIncidentLimit(new CurrencyAmount(500.0))
-//              )
                   .withCoverage(new VehicleCoverageBuilder()
                       .withIncidentLimit(15000bd.ofDefaultCurrency())
                       .withType(TC_COL_PA_EXT))
@@ -103,6 +91,7 @@ class PAClaimContextImpl extends ClaimContextImpl implements PAClaimContext {
                   )
               )
           )
+          .withFault(0)
           .withNonConflictingClaimNumber()
           .create(bundle)
     }, CurrentUser)
@@ -172,10 +161,13 @@ class PAClaimContextImpl extends ClaimContextImpl implements PAClaimContext {
     autoFirstAndFinalScreen.FNOLWizardCheckDV_ready.CheckAmount.Value = currencyAmount.Amount.toString()
 
     if(autoFirstAndFinalScreen.FNOLWizardCheckDV_ready.ApplyDeductible.Visible) {
-    autoFirstAndFinalScreen.FNOLWizardCheckDV_ready.ApplyDeductible.BoolValue = false
+      autoFirstAndFinalScreen.FNOLWizardCheckDV_ready.ApplyDeductible.BoolValue = false
     }
+
     autoFirstAndFinalScreen.FNOLWizardCheckDV_ready.CheckMailTo.Value = "Temp address"
     autoFirstAndFinalScreen.FNOLWizardCheckDV_ready.MailingAddressInputSet.CCAddressInputSet.setAddress("200 Somewhere Street", "San Mateo", TC_CA, "94404")
+
+
   }
 
   override function addThirdPartyVehicle(table : DataTable) {
@@ -492,5 +484,4 @@ class PAClaimContextImpl extends ClaimContextImpl implements PAClaimContext {
       claim.SubrogationSummary.referForSubrogation()
     }, CurrentUser)
   }
-
 }

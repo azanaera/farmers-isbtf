@@ -1,4 +1,4 @@
-@personal_auto @PA-DetermineHandlingStrategy-Assignment @suite
+@personal_auto @PA-DetermineHandlingStrategy-Assignment @suite @DesignatedFunctions
 Feature: Assignment - Adjuster (PA-DetermineHandlingStrategy-Assignment)
 
   As an adjuster,

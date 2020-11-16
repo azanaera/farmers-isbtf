@@ -2,7 +2,6 @@ package gw.cucumber.steps.exposure
 
 uses com.google.inject.Inject
 uses cucumber.api.DataTable
-uses cucumber.api.java.en.And
 uses cucumber.api.java.en.Given
 uses cucumber.api.java.en.Then
 uses cucumber.api.java.en.When

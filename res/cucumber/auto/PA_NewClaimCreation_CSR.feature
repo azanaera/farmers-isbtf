@@ -6,7 +6,7 @@ Feature: New Claim Creation CSR (PA_NewClaimCreation_CSR)
 
   Background:
     Given I am a user with the "Customer Service Associate" role
-#    And I have the "Toggle Auto APD Specialist Level 1" authority limit profile
+    And I have the "Toggle Auto APD Specialist Level 1" authority limit profile
 
   Scenario Outline: 1. Filing a new Personal Auto claim with a loss cause
     Given a Personal Auto policy
@@ -32,13 +32,13 @@ Feature: New Claim Creation CSR (PA_NewClaimCreation_CSR)
     And an incident for the selected vehicle should be created on the claim
     And a "Collision" exposure should be created on the claim
 
-  # TODO --OK-- ignoring S3: First and Final is broken
+  # TODO ignoring S3: First and Final is broken
   @ignore
   Scenario: 3. Filing a new Personal Auto claim through Auto First and Final Wizard
     Given a Personal Auto policy
     When I start filing a claim in Auto First and Final Wizard
     And the claim was reported by the Insured
-    And I set claim loss cause to "Hail"
+    And I set claim loss cause to "Collision with motor vehicle"
     And I select the "1st" covered vehicle
     And the insured is the claimant
     And I add an autobody repair shop "Advanced Auto Repair Center"

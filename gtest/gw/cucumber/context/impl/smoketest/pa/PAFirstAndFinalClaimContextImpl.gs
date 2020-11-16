@@ -31,12 +31,6 @@ class PAFirstAndFinalClaimContextImpl extends PAClaimContextImpl implements PACl
     wizard.QuickClaimAutoFirstAndFinal.setReportedByToThirdParty()
   }
 
-  override function setLossCause(lossCauseText : String) {
-    var lossCause = new TypelistTransformer<LossCause>().transform(lossCauseText)
-    var wizard = Wizard
-    wizard.goToAutoFirstAndFinal()
-    wizard.QuickClaimAutoFirstAndFinal.FNOLWizard_AutoFirstAndFinalScreen.Claim_LossCause_Ext.TypeKeyValue = lossCause
-  }
   override function selectInvolvedVehicle(indexString : String) {
     var index = indexString.substring(0, 1).toInt() - 1
 
@@ -66,7 +60,6 @@ class PAFirstAndFinalClaimContextImpl extends PAClaimContextImpl implements PACl
     addressInputSet.Address_AddressLine1.Value = "Address line 1"
     addressInputSet.Address_City.Value = "San Jose"
     addressInputSet.Address_State.clickByLabelSubstr("California")
-    addressInputSet.globalAddressContainer.Address_AddressType.clickByLabelSubstr("Mailing")
     newContactPopup.ContactDetailScreen.setRequiredFieldsIfNotPresent()
     var location = newContactPopup.update()
     UIHelper.assertNoMessages(location)
@@ -99,6 +92,13 @@ class PAFirstAndFinalClaimContextImpl extends PAClaimContextImpl implements PACl
       newClaimSaved = wizard.finish()
     }
     captureNewlyCreatedClaim((newClaimSaved as NewClaimSaved).ClaimEntity)
+  }
+
+  override function setLossCause(lossCauseText : String) {
+    var lossCause = new TypelistTransformer<LossCause>().transform(lossCauseText)
+    var wizard = Wizard
+    wizard.goToAutoFirstAndFinal()
+    wizard.QuickClaimAutoFirstAndFinal.FNOLWizard_AutoFirstAndFinalScreen.Claim_LossCause_Ext.TypeKeyValue = lossCause
   }
 
 }

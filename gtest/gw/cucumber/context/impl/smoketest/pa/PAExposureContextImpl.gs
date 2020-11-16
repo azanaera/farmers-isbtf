@@ -154,21 +154,20 @@ class PAExposureContextImpl extends ExposureContextImpl implements PAExposureCon
   override function addCollisionExposureByCoverage() {
     var claimSummary = new Navigation<ClaimSummary>(_proxy).ensureOnPage(\tabBar -> tabBar.goToClaim(_claimWrapper.get()), CurrentUser)
     claimSummary.ClaimMenuActions.click()
-
+// modified code
     var covMenu = claimSummary.ClaimMenuActions.ClaimMenuActions_NewExposure.NewExposureMenuItemSet_coverage
     var riskUnitEntry: NewExposureMenuItemSet_coverage.entry
     riskUnitEntry = covMenu._Entries.firstWhere(\elt -> elt.item.Text == _claimWrapper.get().Policy.RiskUnits.single().DisplayName)
     if (riskUnitEntry == null) {
       riskUnitEntry = covMenu._Entries[0]
     }
-
     var covEntry: NewExposureMenuItemSet_coverage.entry
     covEntry = riskUnitEntry.item._Entries.firstWhere(\elt -> elt.item.Text == CoverageSubtype.TC_COL_PA_EXT.DisplayName)
     if (covEntry == null) {
       covEntry = riskUnitEntry.item._Entries[0]
     }
     var exposureScreen = covEntry.item.click()
-
+//
     var newClaimVehicleDamageDV = exposureScreen.NewExposureScreen.NewExposureDV_Vehicledamage.NewClaimVehicleDamageDV
     newClaimVehicleDamageDV.Claimant_Picker.selectFirstValidOption()
     newClaimVehicleDamageDV.Claimant_Type.selectFirstValidOption()

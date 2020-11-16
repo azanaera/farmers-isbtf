@@ -75,5 +75,4 @@ interface ExposureContext {
    * @param coverageTypeText
    */
   function createExposureForCoverageType(coverageTypeText : String)
-
 }
